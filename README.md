@@ -1,2 +1,3 @@
-# sflcm-homepage-prototype-creative
-SFLCM creative homepage prototype (preview only)
+# SFLCM Creative Homepage Prototype
+
+Preview-only static prototype. Not production.
