@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1000 -1000 2000 2000" role="img" aria-labelledby="t">
+  <title id="t">South Florida Conservatory of Music mark</title>
+  <!-- Vector rebuild of the SFLCM mark (four figures joining arms), traced from sflcm.com/images/sflcm-logo.webp -->
+  <defs>
+    <g id="fig">
+      <path d="M0-128C-83-453-287-752-560-876V-563C-349-484-153-333 0-128Z"/>
+      <path d="M0-128C83-453 287-752 560-876V-563C349-484 153-333 0-128Z"/>
+      <circle cy="-784" r="165.5"/>
+    </g>
+  </defs>
+  <use href="#fig" fill="#237aa1"/>
+  <use href="#fig" fill="#b01a1a" transform="rotate(90)"/>
+  <use href="#fig" fill="#237aa1" transform="rotate(180)"/>
+  <use href="#fig" fill="#b01a1a" transform="rotate(270)"/>
+</svg>
