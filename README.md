@@ -1,3 +1,5 @@
 # SFLCM Creative Homepage Prototype
 
-Preview-only static prototype. Not production.
+**Live phone preview (HTTPS):** https://statutes-sci-carried-asking.trycloudflare.com/
+
+Prototype only — not production sflcm.com.
