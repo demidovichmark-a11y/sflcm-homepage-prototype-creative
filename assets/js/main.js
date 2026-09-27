@@ -15,11 +15,31 @@
   var hero = $('[data-hero]');
   var headerMark = $('[data-mark="header"]');
 
+  var arch = $('[data-arch]');
+  var archReady = false;
+  var archVisible = false;
+
+  function startArch() {
+    if (!hero || hero.classList.contains('arch-live')) return;
+    hero.classList.add('arch-live');
+    var m = $('[data-mark="hero"]', hero);
+    if (m) m.classList.add('is-assembled');
+  }
+  function maybeStartArch() { if (archReady && archVisible) startArch(); }
   function startHero() {
     if (!hero || hero.classList.contains('is-live')) return;
     hero.classList.add('is-live');
-    var m = $('[data-mark="hero"]', hero);
-    if (m) m.classList.add('is-assembled');
+    archReady = true;
+    maybeStartArch();
+  }
+  // On phones the arch sits below the fold, so its sunrise waits until it is actually seen.
+  if (arch && 'IntersectionObserver' in window) {
+    var archIO = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { archVisible = true; maybeStartArch(); archIO.disconnect(); }
+    }, { threshold: 0.35 });
+    archIO.observe(arch);
+  } else {
+    archVisible = true;
   }
   requestAnimationFrame(function () {
     if (headerMark) headerMark.classList.add('is-assembled');
@@ -92,7 +112,13 @@
 
     if (hero) {
       var hr = hero.getBoundingClientRect();
-      var hp = reduced ? 0 : clamp(-hr.top / Math.max(1, hr.height * 0.85), 0, 1);
+      var hp = 0;
+      if (!reduced && arch) {
+        // Bloom starts once the arch's centre passes mid-screen (immediately on desktop, later on phones).
+        var ar = arch.getBoundingClientRect();
+        var start = Math.max(0, ar.top + y + ar.height / 2 - vh / 2);
+        hp = clamp((y - start) / Math.max(1, ar.height * 0.9), 0, 1);
+      }
       hero.style.setProperty('--hp', hp.toFixed(4));
       if (dock) {
         var show = hr.bottom < vh * 0.25 && !dockBlocked.trial && !dockBlocked.footer;
@@ -277,6 +303,7 @@
     if (!menuBtn || !menu) return;
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     $('.menu-btn__label', menuBtn).textContent = open ? 'Close' : 'Menu';
+    if (open && header) menu.style.setProperty('--menu-top', Math.max(0, header.getBoundingClientRect().bottom) + 'px');
     menu.hidden = !open;
     doc.documentElement.style.overflow = open ? 'hidden' : '';
     if (open) { var first = $('a', menu); if (first) first.focus(); }
