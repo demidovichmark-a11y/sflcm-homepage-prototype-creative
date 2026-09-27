@@ -173,8 +173,9 @@ the live Grand Opening artwork to remove its baked-in headline.
 
 ## Accessibility & compatibility
 
-- Semantic landmarks, a skip link, labelled SVGs (`role="img"` + `<title>`), visible focus rings, a
-  keyboard-operable menu (Esc closes it), and `aria-live` on the countdown status.
+- Semantic landmarks, a skip link, labelled illustrations (`role="img"` + `aria-label`, so no hover
+  tooltips cover the art), visible focus rings, a keyboard-operable menu (Esc closes it), and `aria-live`
+  on the countdown status.
 - Text contrast: coral buttons use dark ink text (about 5.4:1); on light backgrounds a deeper coral
   (`#d4402f`) is used for display italics.
 - Classic `defer` scripts (no ES modules), so the page works from `file://`.
