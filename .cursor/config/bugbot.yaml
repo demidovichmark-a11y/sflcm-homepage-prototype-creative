@@ -1,0 +1,11 @@
+# Bugbot repo config (https://cursor.com/docs/bugbot#repository-config-file).
+# Bugbot reads this from the PR's base branch, so it takes effect after merge.
+# Approved by Mark 2026-10-20: review once when a PR opens; comment
+# `bugbot run` for a fresh review. Autofix stays off.
+version: 1
+
+triggers:
+  frequency: oncePerPr # everyPush | oncePerPr
+
+autofix:
+  mode: disabled
